@@ -1,0 +1,16 @@
+Step 1: Install git and create a GitHub account
+Step 2: Create a local git repository. 
+When creating a new project 
+on your local machine using git, you'll first create a 
+new repository (or often, 'repo', for short).
+Step 3: Add a new file to the repo ,Go ahead and add a new file to 
+the project. 
+Step 4: Add a file to the staging environment Add a file to the 
+staging environment using the git add command.  - git add.
+Step 5: Create a commit .It's time to create your first commit!
+      - git commit -m "Initial commit with PWA files"
+Step 6: Create a new repository on GitHub
+Step 7: Push a branch to GitHub
+      - git remote add origin https://github.com/YOUR_USERNAME/ecommerce-pwa.git
+Step 8: Then, push the main branch to GitHub:             
+      - git push -u origin main
