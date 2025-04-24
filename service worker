@@ -1,0 +1,64 @@
+<html> 
+    <title> 
+        SW example 
+    </title> 
+    <body> 
+        <h1>Service Worker</h1> 
+        <script> 
+            if("serviceWorker" in navigator) 
+            { 
+                navigator.serviceWorker.register('./sw.js').then((result)=>{ 
+                    console.warn("result",result) 
+                }).catch(function(e){ 
+                    console.warn("e",e) 
+                }) 
+            }else{ 
+                console.warn("service worker not working") 
+            } 
+         </script> 
+    </body> 
+</html>
+
+sw.js
+const CACHE_NAME = 'pwa-cache-v1';
+const URLS_TO_CACHE = [
+  '/',
+  '/index.html',
+];
+self.addEventListener('install', event => {
+  console.warn("SW installed");
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(URLS_TO_CACHE);
+    })
+  );
+});
+self.addEventListener('fetch', event => {
+  console.warn("SW fetch triggered for", event.request.url);
+  event.respondWith(
+    caches.match(event.request).then(cached => {
+      return cached || fetch(event.request);
+    })
+  );
+});
+self.addEventListener('sync', event => {
+  console.warn("Background sync event:", event.tag);
+  if (event.tag === 'sync-data') {
+    event.waitUntil(
+      // Example: fake sync task
+      fetch('/api/sync', {
+        method: 'POST',
+        body: JSON.stringify({ synced: true }),
+        headers: { 'Content-Type': 'application/json' }
+      })
+    );
+  }
+});
+
+Put both files (index.html and sw.js) in the same folder.
+Run it on a local server.
+python -m http.server in the folder terminal
+Then visit http://localhost:8000/index.html
+Go to google dev tools and select offline from application -> service workers
+
+
