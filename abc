@@ -1,0 +1,70 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyHomePage()));
+}
+
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  bool _isSwitched = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Flutter Widgets')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Text Widget
+            Text(
+              _isSwitched ? 'Switch is ON' : 'Switch is OFF',
+              style: TextStyle(fontSize: 24),
+            ),
+            SizedBox(height: 20), // Adding space between widgets
+            
+            // Elevated Button Widget
+            ElevatedButton(
+              onPressed: () => print('Button Pressed!'),
+              child: Text('Press Me'),
+            ),
+            SizedBox(height: 20), // Adding space between widgets
+            
+            // Container Widget
+            Container(
+              color: Colors.blue,
+              padding: EdgeInsets.all(16),
+              child: Text(
+                'Container',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            SizedBox(height: 20), // Adding space between widgets
+            
+            // Icon Widget
+            Icon(
+              Icons.star,
+              size: 50,
+              color: Colors.yellow,
+            ),
+            SizedBox(height: 20), // Adding space between widgets
+            
+            // Switch Widget
+            Switch(
+              value: _isSwitched,
+              onChanged: (value) {
+                setState(() {
+                  _isSwitched = value;
+                });
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
